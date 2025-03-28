@@ -7,45 +7,35 @@ import Animated, {
   Extrapolation,
   interpolate,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
 
 export function CircleGesturesLesson() {
-  const scale = useSharedValue(1);
-  const x = useSharedValue(0);
+  const isInteracting = useSharedValue(false);
+  const scale = useDerivedValue(() => {
+    return withSpring(isInteracting.value ? 2 : 1);
+  });
 
-  const tapGesture = Gesture.Tap()
-    .maxDuration(100000)
-    .onBegin(() => {
-      scale.value = withSpring(2);
-    })
-    .onEnd(() => {
-      scale.value = withSpring(1);
-    });
-
-  const panGesture = Gesture.Pan()
+  const gesture = Gesture.Pan()
     .averageTouches(true)
-    .onChange((ev) => {
-      x.value += ev.changeX;
+    .onBegin(() => {
+      isInteracting.value = true;
     })
-    .onEnd(() => {
-      x.value = withSpring(0);
-      scale.value = withSpring(1);
+    .onFinalize(() => {
+      isInteracting.value = false;
     });
-  const gestures = Gesture.Simultaneous(tapGesture, panGesture);
+
   const animatedStyle = useAnimatedStyle(() => {
     return {
       borderWidth: interpolate(
         scale.value,
         [1, 2],
         [layout.knobSize / 2, 2],
-        Extrapolation.CLAMP
+        Extrapolation.CLAMP,
       ),
       transform: [
-        {
-          translateX: x.value,
-        },
         {
           scale: scale.value,
         },
@@ -55,7 +45,7 @@ export function CircleGesturesLesson() {
   return (
     <Container>
       <View style={{ flex: 1, justifyContent: "center" }}>
-        <GestureDetector gesture={gestures}>
+        <GestureDetector gesture={gesture}>
           <Animated.View
             style={[styles.knob, animatedStyle]}
             hitSlop={hitSlop}

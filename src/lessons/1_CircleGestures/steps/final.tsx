@@ -39,7 +39,7 @@ export function CircleGesturesLesson() {
         scale.value,
         [1, 2],
         [layout.knobSize / 2, 2],
-        Extrapolation.CLAMP
+        Extrapolation.CLAMP,
       ),
       transform: [
         {

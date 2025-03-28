@@ -7,6 +7,7 @@ import Animated, {
   Extrapolation,
   interpolate,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
@@ -14,12 +15,12 @@ import Animated, {
 export function CircleGesturesLesson() {
   const scale = useSharedValue(1);
 
-  const tapGesture = Gesture.Tap()
-    .maxDuration(100000)
+  const gesture = Gesture.Pan()
+    .averageTouches(true)
     .onBegin(() => {
       scale.value = withSpring(2);
     })
-    .onEnd(() => {
+    .onFinalize(() => {
       scale.value = withSpring(1);
     });
 
@@ -29,7 +30,7 @@ export function CircleGesturesLesson() {
         scale.value,
         [1, 2],
         [layout.knobSize / 2, 2],
-        Extrapolation.CLAMP
+        Extrapolation.CLAMP,
       ),
       transform: [
         {
@@ -41,7 +42,7 @@ export function CircleGesturesLesson() {
   return (
     <Container>
       <View style={{ flex: 1, justifyContent: "center" }}>
-        <GestureDetector gesture={tapGesture}>
+        <GestureDetector gesture={gesture}>
           <Animated.View
             style={[styles.knob, animatedStyle]}
             hitSlop={hitSlop}
