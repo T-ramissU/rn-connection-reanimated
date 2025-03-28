@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Reanimated Connection",
+    "slug": "rn-connection-reanimated",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "scheme": "rn-connection-reanimated",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.softwaremansion.rnconnectionreanimated"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.softwaremansion.rnconnectionreanimated"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "newArchEnabled": true
+  }
+}
