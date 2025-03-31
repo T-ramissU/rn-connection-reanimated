@@ -13,6 +13,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 export function CircleGesturesLesson() {
+  const x = useSharedValue(0);
   const isInteracting = useSharedValue(false);
   const scale = useDerivedValue(() => {
     return withSpring(isInteracting.value ? 2 : 1);
@@ -23,10 +24,15 @@ export function CircleGesturesLesson() {
     .onBegin(() => {
       isInteracting.value = true;
     })
+    .onChange((ev) => {
+      x.value += ev.changeX;
+    })
+    .onEnd(() => {
+      x.value = withSpring(0);
+    })
     .onFinalize(() => {
       isInteracting.value = false;
     });
-
   const animatedStyle = useAnimatedStyle(() => {
     return {
       borderWidth: interpolate(
@@ -36,6 +42,9 @@ export function CircleGesturesLesson() {
         Extrapolation.CLAMP,
       ),
       transform: [
+        {
+          translateX: x.value,
+        },
         {
           scale: scale.value,
         },

@@ -20,7 +20,7 @@ export function BalloonSliderLesson() {
 
   const panGesture = Gesture.Pan()
     .averageTouches(true)
-    .onStart(() => {
+    .onBegin(() => {
       knobScale.value = withSpring(1);
     })
     .onChange((ev) => {
@@ -36,7 +36,7 @@ export function BalloonSliderLesson() {
         knobScale.value,
         [0, 1],
         [layout.knobSize / 2, 2],
-        Extrapolation.CLAMP
+        Extrapolation.CLAMP,
       ),
       transform: [
         {

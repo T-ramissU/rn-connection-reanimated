@@ -18,19 +18,13 @@ export function BalloonSliderLesson() {
   const x = useSharedValue(0);
   const knobScale = useSharedValue(1);
 
-  const tapGesture = Gesture.Tap()
-    .maxDuration(100000)
-    .onStart(() => {
-      knobScale.value = withSpring(1);
-    })
-    .onEnd(() => {
-      knobScale.value = withSpring(0);
-    });
-
   const aRef = useAnimatedRef<View>();
 
   const panGesture = Gesture.Pan()
     .averageTouches(true)
+    .onStart(() => {
+      knobScale.value = withSpring(1);
+    })
     .onChange((ev) => {
       const size = measure(aRef);
       x.value = clamp((x.value += ev.changeX), 0, size.width);
@@ -38,14 +32,13 @@ export function BalloonSliderLesson() {
     .onEnd(() => {
       knobScale.value = withSpring(1);
     });
-  const gestures = Gesture.Simultaneous(tapGesture, panGesture);
   const animatedStyle = useAnimatedStyle(() => {
     return {
       borderWidth: interpolate(
         knobScale.value,
         [0, 1],
         [layout.knobSize / 2, 2],
-        Extrapolation.CLAMP
+        Extrapolation.CLAMP,
       ),
       transform: [
         {
@@ -60,7 +53,7 @@ export function BalloonSliderLesson() {
 
   return (
     <Container>
-      <GestureDetector gesture={gestures}>
+      <GestureDetector gesture={panGesture}>
         <View ref={aRef} style={styles.slider} hitSlop={hitSlop}>
           <Animated.View style={[styles.progress, { width: x }]} />
           <Animated.View style={[styles.knob, animatedStyle]} />

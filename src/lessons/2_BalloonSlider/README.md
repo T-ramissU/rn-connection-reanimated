@@ -18,7 +18,7 @@ https://github.com/software-mansion-labs/appjs-2023-workshop-reanimated/assets/3
   <b>[1]</b> Copy the code displaying a knob from the previous lesson and modify it such that it no longer snaps to the center upon release.
 </summary>
 
-Remove `onFinalize` callback from the previous lesson which should result in the knob staying at the place where it was released.
+Remove `onEnd` callback from the previous lesson which should result in the knob staying at the place where it was released.
 
 </details><br/>
 
@@ -215,15 +215,18 @@ Then we update it along the scale shared value used for the knob:
 ```ts
 const balloonScale = useSharedValue(0);
 
-const tapGesture = Gesture.Tap()
-  .maxDuration(100000)
+const panGesture = Gesture.Pan()
+  .averageTouches(true)
   .onBegin(() => {
-    scale.value = withSpring(2);
     balloonScale.value = withSpring(1);
+    knobScale.value = withSpring(1);
+  })
+  .onChange((ev) => {
+    x.value += ev.changeX;
   })
   .onEnd(() => {
-    scale.value = withSpring(1);
     balloonScale.value = withSpring(0);
+    knobScale.value = withSpring(0);
   });
 ```
 
@@ -251,8 +254,6 @@ const balloonStyle = useAnimatedStyle(() => {
 </details><br/>
 
 ## Step 4 – Animating text
-
-In this step we will learn how
 
 https://github.com/software-mansion-labs/appjs-2023-workshop-reanimated/assets/39658211/5adb1e1b-cb5f-4d5e-8ea4-3b987d3cddc9
 

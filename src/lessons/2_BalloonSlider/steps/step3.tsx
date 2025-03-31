@@ -19,21 +19,14 @@ export function BalloonSliderLesson() {
   const scale = useSharedValue(1);
   const balloonScale = useSharedValue(0);
 
-  const tapGesture = Gesture.Tap()
-    .maxDuration(100000)
-    .onBegin(() => {
-      scale.value = withSpring(2);
-      balloonScale.value = withSpring(1);
-    })
-    .onEnd(() => {
-      scale.value = withSpring(1);
-      balloonScale.value = withSpring(0);
-    });
-
   const aRef = useAnimatedRef<View>();
 
   const panGesture = Gesture.Pan()
     .averageTouches(true)
+    .onStart(() => {
+      scale.value = withSpring(2);
+      balloonScale.value = withSpring(1);
+    })
     .onChange((ev) => {
       const size = measure(aRef);
       x.value = clamp((x.value += ev.changeX), 0, size.width);
@@ -42,14 +35,13 @@ export function BalloonSliderLesson() {
       scale.value = withSpring(1);
       balloonScale.value = withSpring(0);
     });
-  const gestures = Gesture.Simultaneous(tapGesture, panGesture);
   const animatedStyle = useAnimatedStyle(() => {
     return {
       borderWidth: interpolate(
         scale.value,
         [1, 2],
         [layout.knobSize / 2, 2],
-        Extrapolation.CLAMP
+        Extrapolation.CLAMP,
       ),
       transform: [
         {
@@ -72,7 +64,7 @@ export function BalloonSliderLesson() {
           translateY: interpolate(
             balloonScale.value,
             [0, 1],
-            [0, -layout.indicatorSize]
+            [0, -layout.indicatorSize],
           ),
         },
       ],
@@ -81,7 +73,7 @@ export function BalloonSliderLesson() {
 
   return (
     <Container>
-      <GestureDetector gesture={gestures}>
+      <GestureDetector gesture={panGesture}>
         <View ref={aRef} style={styles.slider} hitSlop={hitSlop}>
           <Animated.View style={[styles.balloon, balloonStyle]}>
             <View style={styles.textContainer}>
