@@ -23,7 +23,7 @@ import Animated, {
 } from "react-native-reanimated";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Preview } from "@/lessons/6_Tienda/3DPreview";
+import { Preview } from "@/lessons/4_Tienda/3DPreview";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
