@@ -2,7 +2,7 @@
 
 https://user-images.githubusercontent.com/2805320/236633815-8a714b8d-97d0-4b26-b04e-1e1b5bbf8c0d.MP4
 
-## Step 1 – Add tap gesture to the knob
+## Step 1 – Add pan gesture to the knob
 
 https://user-images.githubusercontent.com/2805320/236633812-e237aa2f-3608-4e26-b8fa-f8991d6a6355.mov
 
@@ -146,7 +146,7 @@ export function CircleGesturesLesson() {
 <br />
 <br />
 
-## Step 3 - Only with Pan gesture
+## Step 3 - Move the knob
 
 https://user-images.githubusercontent.com/2805320/236633815-8a714b8d-97d0-4b26-b04e-1e1b5bbf8c0d.MP4
 
