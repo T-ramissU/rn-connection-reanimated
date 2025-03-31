@@ -815,3 +815,7 @@ export function Preview() {
 </details>
 
 <br/>
+
+## Next step
+
+**Go to: [Dynamic Tabs](../5_DynamicTabs/)**

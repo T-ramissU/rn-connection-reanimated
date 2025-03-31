@@ -246,4 +246,4 @@ Use <code>.springify()</code> modifier to emphasize the effect
 
 ## Next step
 
-**Go to: [Skia Theme Curtain](../5_SkiaThemeCurtain/)**
+**Go to: [Tienda](../4_Tienda/)**

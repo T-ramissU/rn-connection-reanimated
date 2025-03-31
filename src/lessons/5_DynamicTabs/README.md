@@ -343,7 +343,3 @@ const { width } = useWindowDimensions()
 
 </details>
 <br />
-
-## Next step
-
-**Go to: [Emoji Stagger](../4_EmojiStagger/)**

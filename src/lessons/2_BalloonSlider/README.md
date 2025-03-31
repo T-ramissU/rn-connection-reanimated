@@ -616,4 +616,4 @@ Just check [steps/final.tsx](./steps/final.tsx) – this is the final step 🤷
 
 ## Next step
 
-**Go to: [Dynamic Tabs](../3_DynamicTabs/)**
+**Go to: [Emoji Stagger](../3_EmojiStagger/)**
