@@ -135,11 +135,12 @@ export function CircleGesturesLesson() {
 <summary>
   <b>[2]</b> Use `useDerivedValue` to animate the knob based on the `isInteracting` value
 </summary>
-  ```jsx
-  const scale = useDerivedValue(() => {
-    return withSpring(isInteracting.value ? 2 : 1);
-  });
-  ```
+
+```jsx
+const scale = useDerivedValue(() => {
+  return withSpring(isInteracting.value ? 2 : 1);
+});
+```
 
 </details>
 <br />
